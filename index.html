@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allo Recharge</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-container input {
+      padding: 8px 12px;
+      border-radius: 20px 0 0 20px;
+      border: none;
+      outline: none;
+    }
+
+    .search-container button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      background: #ff6a00;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .search-container button:hover {
+      background: #e65c00;
+    }
+
+    nav {
+      background: #333;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav a {
+      color: #fff;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background: #444;
+    }
+
+    nav ul li ul {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #444;
+      min-width: 160px;
+      z-index: 1000;
+      border-radius: 0 0 8px 8px;
+      transform: translateY(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    nav ul li:hover > ul {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .hero {
+      background: url("https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1500&q=80") no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px 40px;
+      border-radius: 12px;
+    }
+
+    .container {
+      width: 90%;
+      margin: 30px auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-6px);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product h3 {
+      padding: 12px;
+      font-size: 1.2rem;
+    }
+
+    .product p {
+      padding: 0 12px 12px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .product a {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border: none;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: 0.3s;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .product a:hover {
+      background: #1ebc5b;
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ALLO RECHARGE</h1>
+    <div class="search-container">
+      <input type="text" placeholder="Search unique items...">
+      <button>Search</button>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li>
+        <a href="#">Categories ▼</a>
+        <ul>
+          <li><a href="#">Telecom</a></li>
+          <li><a href="#">Steam Keys</a></li>
+          <li><a href="#">Steam Games</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Social Media</a></li>
+        </ul>
+      </li>
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h2>Welcome to Allo Recharge</h2>
+  </section>
+
+  <div class="container">
+    <h2>Featured Products</h2>
+    <div class="products">
+      <div class="product">
+        <img src="MTC 7.58.jpg" alt="MTC 7.58$">
+        <h3>MTC Magic 7.58$</h3>
+        <p>MTC most used recharge Bundle</p>
+        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Handmade%20Lamp." target="_blank">Order</a>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1581090124320-7e0c4d46f890?auto=format&fit=crop&w=600&q=80" alt="Smart Glasses">
+        <h3>Smart Glasses</h3>
+        <p>Experience the future of augmented reality.</p>
+        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Smart%20Glasses." target="_blank">Order</a>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1598300052370-fc2c98d7c072?auto=format&fit=crop&w=600&q=80" alt="Vintage Camera">
+        <h3>Vintage Camera</h3>
+        <p>A timeless collectible for photography lovers.</p>
+        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Vintage%20Camera." target="_blank">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Allo Recharge &copy; 2025</p>
+  </footer>
+</body>
+</html>
