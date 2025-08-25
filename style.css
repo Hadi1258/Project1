@@ -178,3 +178,23 @@ body {
       padding: 20px;
       margin-top: 40px;
     } 
+
+      /* Phones (portrait) */
+      @media (max-width: 600px) {
+        nav ul {
+          flex-direction: column;
+        }
+        nav a {
+          padding: 12px;
+          text-align: center;
+        }
+        .hero h2 {
+          font-size: 1.5rem;
+          padding: 10px 20px;
+        }
+        .products {
+          grid-template-columns: 1fr; /* one product per row */
+        }
+      }
+
+
