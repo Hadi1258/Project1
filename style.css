@@ -201,7 +201,7 @@ body {
   .search-container {
     width: 100%;              /* take full width */
     display: flex;
-    justify-content: center;  /* keep it centered */
+    
     margin-top: 10px;
   }
 
@@ -239,6 +239,7 @@ body {
     border-radius: 20px;
   }
 }
+
 
 
 
