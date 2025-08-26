@@ -210,7 +210,7 @@ body {
     padding: 10px;           /* a little bigger for touch */
     border-radius: 20px 0 0 20px;
     font-size: 1rem;
-    justify-content: center; 
+     
   }
 
   .search-container button {
@@ -239,6 +239,7 @@ body {
     border-radius: 20px;
   }
 }
+
 
 
 
