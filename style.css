@@ -6,14 +6,28 @@ body {
       padding: 0;
     }
 
-    header {
-      background: #222;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  background: #222;
+  color: #fff;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+@media (min-width: 720px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: justify
+  }
+}
+
+
 
     header h1 {
       font-size: 1.8rem;
@@ -179,66 +193,9 @@ body {
       margin-top: 40px;
     } 
 
-      /* Phones (portrait) */
-      @media (max-width: 600px) {
-        nav ul {
-          flex-direction: column;
-        }
-        nav a {
-          padding: 12px;
-          text-align: center;
-        }
-        .hero h2 {
-          font-size: 1.5rem;
-          padding: 10px 20px;
-        }
-        .products {
-          grid-template-columns: 1fr; /* one product per row */
-        }
-      }
-   /* Mobile screens */
-@media (max-width: 600px) {
-  .search-container {
-    width: 100%;              /* take full width */
-    display: flex;
-    
-    margin-top: 10px;
-  }
+      
 
-  .search-container input {
-    width: 70%;              /* input takes most space */
-    padding: 10px;           /* a little bigger for touch */
-    border-radius: 20px 0 0 20px;
-    font-size: 1rem;
-     
-  }
 
-  .search-container button {
-    width: 30%;              /* button takes remaining space */
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 0 20px 20px 0;
-  }
-}
-
-/* Extra small screens (like very small phones) */
-@media (max-width: 400px) {
-  .search-container {
-    flex-direction: column;   /* stack input and button */
-    align-items: stretch;
-  }
-
-  .search-container input {
-    width: 100%;
-    border-radius: 20px;
-    margin-bottom: 8px;
-  }
-
-  .search-container button {
-    width: 100%;
-    border-radius: 20px;
-  }
-}
 
 
 
