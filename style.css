@@ -196,5 +196,47 @@ body {
           grid-template-columns: 1fr; /* one product per row */
         }
       }
+   /* Mobile screens */
+@media (max-width: 600px) {
+  .search-container {
+    width: 100%;              /* take full width */
+    display: flex;
+    justify-content: center;  /* keep it centered */
+    margin-top: 10px;
+  }
+
+  .search-container input {
+    width: 70%;              /* input takes most space */
+    padding: 10px;           /* a little bigger for touch */
+    border-radius: 20px 0 0 20px;
+    font-size: 1rem;
+  }
+
+  .search-container button {
+    width: 30%;              /* button takes remaining space */
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 0 20px 20px 0;
+  }
+}
+
+/* Extra small screens (like very small phones) */
+@media (max-width: 400px) {
+  .search-container {
+    flex-direction: column;   /* stack input and button */
+    align-items: stretch;
+  }
+
+  .search-container input {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .search-container button {
+    width: 100%;
+    border-radius: 20px;
+  }
+}
 
 
