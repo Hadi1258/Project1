@@ -1,72 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Allo Recharge</title>
-  
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>ALLO RECHARGE</h1>
-    <div class="search-container">
-      <input type="text" placeholder="Search unique items...">
-      <button>Search</button>
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="brand">
+      <a href="/" class="logo" aria-label="Allo Recharge Home">
+        <span class="logo-mark">⚡</span>
+        <span class="logo-text">ALLO <strong>RECHARGE</strong></span>
+      </a>
     </div>
+
+    <input id="nav-toggle" type="checkbox" aria-label="Toggle navigation" />
+    <label for="nav-toggle" class="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="menu">
+        <li class="menu-item"><a href="#">Home</a></li>
+
+        <li class="menu-item has-submenu">
+          <button class="submenu-toggle" aria-haspopup="true" aria-expanded="false">
+            Categories <span class="caret">▼</span>
+          </button>
+          <ul class="submenu">
+            <li class="submenu-item has-submenu">
+              <a href="telecom.html">Telecom</a>
+              <ul class="subsubmenu">
+                <li><a href="MTC.html">Touch (MTC)</a></li>
+                <li><a href="ALFA.html">Alfa</a></li>
+              </ul>
+            </li>
+
+            <!-- NEW: Subscriptions -->
+            <li class="submenu-item has-submenu">
+              <a href="subscriptions.html">Subscriptions</a>
+              <ul class="subsubmenu">
+                <li><a href="netflix.html">Netflix</a></li>
+                <li><a href="canva.html">Canva Pro</a></li>
+                <li><a href="spotify.html">Spotify</a></li>
+              </ul>
+            </li>
+
+            <!-- NEW: Social Media -->
+            <li class="submenu-item has-submenu">
+              <a href="social-media.html">Social Media</a>
+              <ul class="subsubmenu">
+                <li><a href="instagram.html">Instagram (Followers / Views)</a></li>
+                <li><a href="tiktok.html">TikTok (Followers / Views)</a></li>
+                <li><a href="youtube.html">YouTube (Subs / Views)</a></li>
+              </ul>
+            </li>
+
+            <li class="submenu-item"><a href="steam-keys.html">Steam Keys</a></li>
+            <li class="submenu-item"><a href="steam-games.html">Steam Games</a></li>
+            <li class="submenu-item"><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-item"><a href="#whats-new">What’s New</a></li>
+        <li class="menu-item"><a href="#featured">Featured</a></li>
+        <li class="menu-item"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <form class="search" role="search" aria-label="Site">
+      <input type="search" name="q" placeholder="Search recharges, subscriptions…" aria-label="Search" />
+      <button type="submit">Search</button>
+    </form>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li>
-        <a href="#">Categories ▼</a>
-        <ul>
-          <li><a href="telecom.html">Telecom</a></li>
-          <ul>
-            <li><a href="MTC.html">MTC</a></li>
-            <li><a href="ALFA.html">ALFA</a></li>
-          <li><a href="#">Steam Keys</a></li>
-          <li><a href="#">Steam Games</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Social Media</a></li>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Top-Up. Subscriptions. Social Boost.</h1>
+        <p>Instant delivery for mobile recharges, game keys, streaming plans, and social growth packages.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#featured">Shop Featured</a>
+          <a class="btn btn-outline" href="#whats-new">See What’s New</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="section container">
+      <div class="section-head">
+        <h2>Featured Products</h2>
+        <p class="section-sub">Our most popular picks—ready in minutes.</p>
+      </div>
+
+      <div class="grid products">
+        <!-- Product 1 -->
+        <article class="card product">
+          <div class="media">
+            <img src="assets/mtc-7_58.jpg" alt="Touch (MTC) Magic 7.58$ recharge card" loading="lazy" />
+            <span class="badge price">$7.58</span>
+          </div>
+          <div class="content">
+            <h3 class="title">Touch Magic 7.58</h3>
+            <p class="desc">Lebanon MTC bundle—popular fast recharge.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20I%E2%80%99d%20like%20Touch%20(MTC)%207.58%20Magic%20recharge.">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="card product">
+          <div class="media">
+            <img src="assets/pubg-steam.jpg" alt="PUBG Steam game key" loading="lazy" />
+            <span class="badge">Game</span>
+          </div>
+          <div class="content">
+            <h3 class="title">PUBG (Steam)</h3>
+            <p class="desc">Original Steam key—global version.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20I%E2%80%99m%20interested%20in%20PUBG%20Steam%20key.">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="card product">
+          <div class="media">
+            <img src="assets/placeholder-product.jpg" alt="Curated digital product" loading="lazy" />
+            <span class="badge">Hot</span>
+          </div>
+          <div class="content">
+            <h3 class="title">Curated Digital Deal</h3>
+            <p class="desc">Limited weekly offer—ask for the current pick!</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20What%E2%80%99s%20this%20week%E2%80%99s%20special%20digital%20deal%3F">Ask Now</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- What’s New -->
+    <section id="whats-new" class="section container">
+      <div class="section-head">
+        <h2>What’s New</h2>
+        <p class="section-sub">Fresh services we just launched.</p>
+      </div>
+
+      <div class="grid products">
+        <!-- Web Design Services -->
+        <article class="card product service">
+          <div class="media icon-only" aria-hidden="true">
+            <!-- simple inline SVG icon -->
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M3 5h18v14H3zM3 9h18M9 19v-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="badge">Service</span>
+          </div>
+          <div class="content">
+            <h3 class="title">Web Design Services</h3>
+            <p class="desc">Modern, responsive websites for brands & shops. Landing pages, menus, booking & more.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20I%E2%80%99d%20like%20Web%20Design%20Services.">Get a Quote</a>
+          </div>
+        </article>
+
+        <!-- Social Media Management -->
+        <article class="card product service">
+          <div class="media icon-only" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M7 7h10v10H7zM3 12h4M17 12h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="badge">Service</span>
+          </div>
+          <div class="content">
+            <h3 class="title">Social Media Management</h3>
+            <p class="desc">Content, scheduling, growth, & reporting for Instagram, TikTok, and more.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20I%E2%80%99m%20interested%20in%20Social%20Media%20Management.">Let’s Talk</a>
+          </div>
+        </article>
+
+        <!-- Carfax Report -->
+        <article class="card product service">
+          <div class="media icon-only" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M4 7h16v10H4zM4 7l4-4h8l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M7 11h10M7 14h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="badge">Report</span>
+          </div>
+          <div class="content">
+            <h3 class="title">Carfax Report</h3>
+            <p class="desc">Official vehicle history: accidents, ownership, mileage & market insights.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" target="_blank"
+               href="https://wa.me/1234567890?text=Hi!%20I%20need%20a%20Carfax%20Report.">Request Report</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div>
+        <h4>Allo Recharge</h4>
+        <p>Instant digital recharges, subscriptions, and growth services.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="list-plain">
+          <li><a target="_blank" href="https://wa.me/1234567890">WhatsApp: +1 234 567 890</a></li>
+          <li><a href="mailto:support@allo.example">support@allo.example</a></li>
         </ul>
-      </li>
-      <li><a href="#">New Arrivals</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <h2>Welcome to Allo Recharge</h2>
-  </section>
-
-  <div class="container">
-    <h2>Featured Products</h2>
-    <div class="products">
-      <div class="product">
-        <img src="MTC 7.58.jpg" alt="MTC 7.58$">
-        <h3>Touch Magic 7.58$</h3>
-        <p>MTC most used recharge Bundle</p>
-        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Handmade%20Lamp." target="_blank">Order</a>
       </div>
-      <div class="product">
-        <img src="" alt="PUBG Steam">
-        <h3>PUBG Steam.</h3>
-        <p>Steam Best Seller</p>
-        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Smart%20Glasses." target="_blank">Order</a>
-      </div>
-      <div class="product">
-        <img src="" alt="Product 3">
-        <h3>Product 3</h3>
-        <p>not yet decided :p.</p>
-        <a href="https://wa.me/1234567890?text=Hi!%20I'm%20interested%20in%20the%20Vintage%20Camera." target="_blank">Order</a>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="list-plain">
+          <li><a href="#featured">Featured</a></li>
+          <li><a href="#whats-new">What’s New</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-
-  <footer>
-    <p>Allo Recharge &copy; 2025</p>
+    <div class="copy">© 2025 Allo Recharge. All rights reserved.</div>
   </footer>
+
+  <!-- No JS: accessible submenu via :focus-within + hover -->
 </body>
 </html>
