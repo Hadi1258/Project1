@@ -288,3 +288,28 @@ body{
   }
   .badge{ background: rgba(255,255,255,.9); color:#0e1421; border-color: #e6eef9; }
 }
+@media (max-width: 960px) {
+  .site-header {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+  }
+
+  .hamburger {
+    order: 1;
+    justify-self: start;
+  }
+
+  .brand {
+    order: 2;
+  }
+
+  .site-nav {
+    grid-column: 1 / -1;
+  }
+
+  .search {
+    display: none;
+  }
+}
+
