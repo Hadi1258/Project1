@@ -72,6 +72,7 @@ body{
   background: rgba(15,17,23,.7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,.05);
+  transition: padding .18s ease, background .18s ease;
 }
 .brand .logo{
   display:flex; align-items:center; gap:10px;
@@ -116,7 +117,7 @@ body{
 .submenu a{ display:block; padding:10px 12px; border-radius:8px; }
 .submenu a:hover{ background: rgba(255,255,255,.06); }
 
-/* Third level */
+/* Third level (desktop) */
 .subsubmenu{
   display:none;
   position:absolute; left: calc(100% + 8px); top:0;
@@ -222,13 +223,10 @@ body{
    - No burger menu
    - Show only Home + Categories + Search
    - Center nav items
-   - Keep dropdowns visible (not clipped)
-   - Responsive cards below 600px
+   - Keep dropdowns visible
 ==========================================*/
 @media (max-width: 960px){
-  html, body {
-    overflow-x: hidden; /* prevent sideways scroll */
-  }
+  html, body { overflow-x: hidden; }
 
   .site-header{
     grid-template-columns: 1fr;
@@ -238,58 +236,44 @@ body{
       "nav";
     row-gap: 8px;
     max-width: 100vw;
+    padding: 12px 12px;
   }
   .site-header > * { min-width: 0; }
 
-  /* Remove burger */
   .hamburger{ display:none !important; }
-
-  /* Brand row */
   .brand{ grid-area: brand; }
 
-  /* Search row */
   .search{
     grid-area: search;
     justify-self: stretch;
     width: 100%;
     max-width: 100%;
   }
-  .search input{
-    width: 100%;
-    max-width: 100%;
-  }
+  .search input{ width: 100%; max-width: 100%; }
 
-  /* Nav row */
   .site-nav{
     grid-area: nav;
-    position: static;
-    transform: none;
-    width: 100%;
-    max-width: 100%;
+    position: static; transform: none;
+    width: 100%; max-width: 100%;
     overflow: visible !important;
   }
 
-  /* Menu basics */
   .menu{
-    display:flex;
-    align-items:center;
-    justify-content:center; /* center items */
-    gap: 16px;
-    padding: 10px 12px;
+    display:flex; align-items:center; justify-content:center;
+    gap: 16px; padding: 10px 12px;
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    overflow: visible !important; /* prevent clipping */
+    overflow: visible !important;
     max-width: 100%;
   }
 
-  /* Hide desktop-only links */
   .desktop-only{ display:none !important; }
   .menu > .menu-item{ display:none; }
   .menu > .menu-item.nav-home,
   .menu > .menu-item.nav-categories{ display:inline-flex; }
 
-  /* Dropdown panels */
+  /* Top-level dropdown under "Categories" */
   .menu-item.has-submenu{ position: relative; z-index: 500; }
   .submenu{
     position:absolute;
@@ -310,30 +294,39 @@ body{
   .menu-item.has-submenu:focus-within > .submenu,
   .menu-item.has-submenu:hover > .submenu{ display:block; }
 
-  /* Third-level (branch) */
-  .subsubmenu{
-    position:absolute;
-    top: 0;
-    left: calc(100% + 8px);
-    display:none;
-    min-width: clamp(180px, 60vw, 280px);
-    max-width: 96vw;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding:8px;
-    z-index: 502;
+  /* Branch submenus (e.g., Telecom) on phones:
+     stack UNDER the parent, not flyout; hidden until expanded via JS */
+  .submenu .has-submenu > a{
+    display:flex; align-items:center; justify-content:space-between;
   }
-  .submenu .has-submenu:hover > .subsubmenu,
-  .submenu .has-submenu:focus-within > .subsubmenu{ display:block; }
+  .subsubmenu{
+    position: static;
+    display: none;
+    margin: 6px 0 8px 12px;
+    padding-left: 10px;
+    border-left: 1px solid var(--line);
+    background: transparent;
+    box-shadow: none;
+    min-width: 0;
+  }
+  .submenu .has-submenu.expanded > .subsubmenu{ display:block; }
+
+  /* Header shrinks to logo-only on scroll */
+  .site-header.shrink{
+    padding: 8px 10px;
+    grid-template-areas: "brand";
+    grid-template-columns: 1fr;
+    background: rgba(15,17,23,.9);
+  }
+  .site-header.shrink .search,
+  .site-header.shrink .site-nav{ display:none !important; }
+
+  /* ---- Hero: slightly smaller on phones (issue #2) ---- */
+  .hero{ padding: 56px 0 40px; } /* was 80px 60px */
 }
 
 /* =========================================
    Small Phones (≤ 600px): Compact Layout
-   - 2-column grids
-   - Smaller text & buttons
-   - Square product/category cards
 ==========================================*/
 @media (max-width: 600px){
   .section{ padding: 32px 0; }
@@ -345,7 +338,6 @@ body{
   .grid.products{ grid-template-columns: repeat(2, 1fr); }
   .grid.products > *{ grid-column: auto; }
 
-  /* Compact cards */
   .product .media{ aspect-ratio: 1 / 1; }
   .badge{ top:6px; left:6px; padding:4px 6px; font-size:10px; }
   .product .content{ padding:10px 10px 0; }
@@ -353,4 +345,78 @@ body{
   .product .desc{ font-size: 12px; min-height: auto; margin: 0 0 8px; }
   .product .actions{ padding: 0 10px 12px; }
   .btn{ padding:10px 12px; font-size: 14px; }
+
+  /* Even smaller hero on very small phones */
+  .hero{ padding: 48px 0 32px; }
 }
+
+/* =========================================
+   Predictive Search dropdown
+==========================================*/
+.search {
+  position: relative;
+}
+
+.search-suggestions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  max-height: 52vh;
+  overflow: auto;
+  z-index: 1200;
+}
+
+.search-suggestions li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-suggestions li:hover,
+.search-suggestions li[aria-selected="true"] {
+  background: rgba(255,255,255,.06);
+}
+
+.search-suggestions .sugg-title {
+  font-weight: 700;
+}
+
+.search-suggestions .sugg-type {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: .7;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.search-suggestions mark {
+  background: transparent;
+  color: var(--brand-2);
+  font-weight: 800;
+}
+
+/* small phones: keep it readable */
+@media (max-width: 600px){
+  .search-suggestions li {
+    padding: 9px 8px;
+  }
+  .search-suggestions .sugg-type {
+    display: none; /* tighter */
+  }
+}
+
+
+
