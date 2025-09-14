@@ -225,7 +225,7 @@ body{
    - Center nav items
    - Keep dropdowns visible
 ==========================================*/
-@media (max-width: 960px){
+@media (max-width: 960px) and (hover: none), (max-width: 960px) and (pointer: coarse){
   html, body { overflow-x: hidden; }
 
   .site-header{
@@ -328,7 +328,7 @@ body{
 /* =========================================
    Small Phones (≤ 600px): Compact Layout
 ==========================================*/
-@media (max-width: 600px){
+@media (max-width: 600px) and (hover: none), (max-width: 600px) and (pointer: coarse){
   .section{ padding: 32px 0; }
   .section-head{ margin-bottom: 14px; }
   .section-head h2{ font-size: clamp(18px, 4.8vw, 22px); }
@@ -417,6 +417,7 @@ body{
     display: none; /* tighter */
   }
 }
+
 
 
 
