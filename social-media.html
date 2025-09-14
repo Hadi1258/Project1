@@ -6,38 +6,60 @@
   <title>Social Media – Allo Recharge</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="category.css" />
-  <script src="app.js" defer></script>
   <script src="category.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body data-cat="social-media">
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/"><span class="logo-mark">⚡</span><span class="logo-text">ALLO <strong>RECHARGE</strong></span></a>
-      <form class="search" role="search"><input id="site-search" type="search" placeholder="Search recharges, subscriptions…" autocomplete="off" /><button type="submit" class="btn btn-ghost">Search</button><ul id="search-suggestions" class="search-suggestions" hidden></ul></form>
-      <nav class="site-nav" aria-label="Primary">
-        <ul class="menu">
-          <li class="m-primary"><a href="/">Home</a></li>
-          <li class="has-submenu m-primary">
-            <button class="submenu-toggle" aria-expanded="false">Categories</button>
-            <ul class="submenu">
-              <li class="branch"><button class="branch-toggle" aria-expanded="false">Telecom</button>
-                <ul class="subsubmenu"><li><a href="MTC.html">Touch (MTC)</a></li><li><a href="ALFA.html">Alfa</a></li></ul>
-              </li>
-              <li class="branch"><button class="branch-toggle" aria-expanded="false">Subscriptions</button>
-                <ul class="subsubmenu"><li><a href="netflix.html">Netflix</a></li><li><a href="canva.html">Canva Pro</a></li><li><a href="spotify.html">Spotify</a></li></ul>
-              </li>
-              <li class="branch"><button class="branch-toggle" aria-expanded="false">Social Media</button>
-                <ul class="subsubmenu"><li><a href="instagram.html">Instagram</a></li><li><a href="tiktok.html">TikTok</a></li><li><a href="youtube.html">YouTube</a></li></ul>
-              </li>
-              <li><a href="steam-keys.html">Steam Keys</a></li>
-              <li><a href="steam-games.html">Steam Games</a></li>
-              <li><a href="services.html">Services</a></li>
-            </ul>
-          </li>
-          <li class="hide-mobile"><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <form class="search" role="search">
+        <input id="site-search" type="search" placeholder="Search recharges, subscriptions…" autocomplete="off" />
+        <button type="submit" class="btn btn-ghost">Search</button>
+        <ul id="search-suggestions" class="search-suggestions" hidden></ul>
+      </form>
     </div>
   </header>
 
   <section class="cat-hero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="/">Home</a> › <span data-crumb>Social Media</span></nav>
+      <h1 data-cat-title>Social Media</h1>
+      <p class="section-sub" data-cat-sub>Followers, views & growth packages.</p>
+      <div id="subcats" class="subcat-chips">
+        <a class="chip" href="#">Instagram</a>
+        <a class="chip" href="#">TikTok</a>
+        <a class="chip" href="#">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="product-grid" class="category-grid card-grid"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div><h4>Allo Recharge</h4><p>Instant digital recharges, subscriptions, and growth services.</p></div>
+      <div><h4>Contact</h4><ul class="list-plain"><li><a target="_blank" href="https://wa.me/1234567890">WhatsApp</a></li><li><a href="mailto:support@allo.example">support@allo.example</a></li></ul></div>
+      <div><h4>Quick Links</h4><ul class="list-plain"><li><a href="/">Home</a></li><li><a href="#top">Top</a></li></ul></div>
+    </div>
+    <div class="copy">© 2025 Allo Recharge</div>
+  </footer>
+
+  <script id="cat-data" type="application/json">
+  {
+    "slug": "social-media",
+    "title": "Social Media",
+    "subtitle": "Followers, views & growth packages.",
+    "products": [
+      {"title":"Item 1","badge":"Views","url":"https://wa.me/1234567890?text=Social%20Item%201"},
+      {"title":"Item 2","badge":"Followers","url":"https://wa.me/1234567890?text=Social%20Item%202"},
+      {"title":"Item 3","badge":"Package","url":"https://wa.me/1234567890?text=Social%20Item%203"}
+    ]
+  }
+  </script>
+</body>
+</html>
