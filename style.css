@@ -417,6 +417,66 @@ body{
     display: none; /* tighter */
   }
 }
+/* Desktop safety net: keep desktop layout when hover+fine pointer exist */
+@media (hover: hover) and (pointer: fine){
+  .site-header{
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: none;
+    padding: 14px 16px;
+    background: rgba(15,17,23,.7);
+  }
+  .site-header .search{ display:flex !important; }
+  .site-header .site-nav{ display:block !important; position: static; transform:none; }
+
+  .menu{
+    display:flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    max-width: none;
+  }
+  .menu > .menu-item{ display:inline-flex !important; }
+  .desktop-only{ display:inline-flex !important; }
+
+  /* Ensure dropdowns behave like desktop flyouts */
+  .submenu{
+    position:absolute;
+    left:0;
+    transform: translateY(12px);
+    min-width: 250px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding:8px;
+    display:none;
+  }
+  .menu-item.has-submenu:hover > .submenu,
+  .menu-item.has-submenu:focus-within > .submenu{ display:block; }
+
+  .subsubmenu{
+    position:absolute;
+    left: calc(100% + 8px);
+    top: 0;
+    display:none;
+    min-width: 220px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding:8px;
+    box-shadow: var(--shadow);
+  }
+  .submenu .has-submenu:hover > .subsubmenu,
+  .submenu .has-submenu:focus-within > .subsubmenu{ display:block; }
+
+  /* If header had 'shrink' from JS, don't hide nav on desktop */
+  .site-header.shrink .search,
+  .site-header.shrink .site-nav{ display:flex !important; }
+}
+
 
 
 
