@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alfa – Allo Recharge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="category.css" />
+  <script src="category.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-cat="telecom">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><span class="logo-mark">⚡</span><span class="logo-text">ALLO <strong>RECHARGE</strong></span></a>
+      <form class="search" role="search">
+        <input id="site-search" type="search" placeholder="Search recharges, subscriptions…" autocomplete="off" />
+        <button type="submit" class="btn btn-ghost">Search</button>
+        <ul id="search-suggestions" class="search-suggestions" hidden></ul>
+      </form>
+    </div>
+  </header>
+
+  <section class="cat-hero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="/">Home</a> › <a href="telecom.html">Telecom</a> › <span data-crumb>Alfa</span></nav>
+      <h1 data-cat-title>Alfa</h1>
+      <p class="section-sub" data-cat-sub>Alfa recharges & bundles.</p>
+      <div id="subcats" class="subcat-chips">
+        <a class="chip" href="ALFA.html">Alfa</a>
+        <a class="chip" href="MTC.html">Touch (MTC)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="product-grid" class="category-grid card-grid"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div><h4>Allo Recharge</h4><p>Instant digital recharges, subscriptions, and growth services.</p></div>
+      <div><h4>Contact</h4><ul class="list-plain"><li><a target="_blank" href="https://wa.me/1234567890">WhatsApp</a></li><li><a href="mailto:support@allo.example">support@allo.example</a></li></ul></div>
+      <div><h4>Quick Links</h4><ul class="list-plain"><li><a href="/">Home</a></li><li><a href="#top">Top</a></li></ul></div>
+    </div>
+    <div class="copy">© 2025 Allo Recharge</div>
+  </footer>
+
+  <script id="cat-data" type="application/json">
+  {
+    "slug": "telecom",
+    "title": "Alfa",
+    "subtitle": "Alfa recharges & bundles.",
+    "products": [
+      {"title":"Alfa 5","badge":"Recharge","url":"https://wa.me/1234567890?text=Alfa%205"},
+      {"title":"Alfa 10","badge":"Recharge","url":"https://wa.me/1234567890?text=Alfa%2010"},
+      {"title":"Alfa Bundle","badge":"Bundle","url":"https://wa.me/1234567890?text=Alfa%20Bundle"}
+    ]
+  }
+  </script>
+</body>
+</html>
