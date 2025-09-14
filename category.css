@@ -1,0 +1,28 @@
+/* Category additions — sits on top of your existing style.css */
+:root { --cat-a:#3ac0f0; --cat-b:#6ae38b; }
+
+.cat-hero{
+  padding:56px 0;
+  border-bottom:1px solid var(--line);
+  /* same vibe as home hero but tinted per category */
+  background:
+    radial-gradient(900px 450px at 80% -20%,
+      color-mix(in oklab, var(--cat-a) 30%, transparent), transparent 60%),
+    radial-gradient(700px 350px at 10% 10%,
+      color-mix(in oklab, var(--cat-b) 28%, transparent), transparent 60%);
+}
+.cat-hero h1{ margin:0 0 6px; font-size:clamp(24px, 2.6vw + 16px, 40px); }
+.cat-hero .section-sub{ margin:0; }
+
+.breadcrumb{ color:var(--muted); font-size:14px; margin-bottom:10px; }
+.breadcrumb a{ color:var(--text); opacity:.9; text-decoration:none; }
+.breadcrumb a:hover{ text-decoration:underline; }
+
+/* keep grid consistent but allow slightly wider min card on desktop */
+.category-grid.card-grid{ grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
+
+/* Mobile */
+@media (max-width: 991.98px){
+  .cat-hero{ padding:36px 0; }
+  .category-grid.card-grid{ grid-template-columns:1fr; }
+}
