@@ -8,7 +8,10 @@
 /* =========================
    Utilities
 ========================= */
-const MOBILE_MEDIA = '(max-width: 960px)';
+// narrow + touch (either no hover OR coarse pointer)
+const MOBILE_MEDIA =
+  '(max-width: 960px) and (hover: none), (max-width: 960px) and (pointer: coarse)';
+
 const isMobile = () => window.matchMedia(MOBILE_MEDIA).matches;
 
 const qs  = (sel, root = document) => root.querySelector(sel);
