@@ -23,43 +23,70 @@
 
   <section class="cat-hero">
     <div class="container">
-      <nav class="breadcrumb"><a href="/">Home</a> › <span data-crumb>Subscriptions</span></nav>
-      <h1 data-cat-title>Subscriptions</h1>
-      <p class="section-sub" data-cat-sub>Streaming & productivity plans.</p>
-      <div id="subcats" class="subcat-chips">
-        <a class="chip" href="#">Netflix</a>
-        <a class="chip" href="#">Canva Pro</a>
-        <a class="chip" href="#">Spotify</a>
+      <nav class="breadcrumb"><a href="/">Home</a> › <span>Subscriptions</span></nav>
+      <h1>Subscriptions</h1>
+      <p class="section-sub">Streaming & productivity plans.</p>
+      <div class="subcat-chips">
+        <a class="chip" href="netflix.html">Netflix</a>
+        <a class="chip" href="canva.html">Canva Pro</a>
+        <a class="chip" href="spotify.html">Spotify</a>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div id="product-grid" class="category-grid card-grid"></div>
+      <div class="category-grid card-grid">
+        <!-- Netflix -->
+        <a class="card category-tile" href="netflix.html">
+          <div class="media">
+            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+              <defs><linearGradient id="sub-a" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="var(--cat-a)"/><stop offset="1" stop-color="var(--cat-b)"/></linearGradient></defs>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="1000" cy="110" r="220" fill="url(#sub-a)" opacity=".18"/>
+              <circle cx="200" cy="590" r="240" fill="url(#sub-a)" opacity=".14"/>
+            </svg>
+            <span class="badge">Subcategory</span>
+          </div>
+          <div class="content"><h3>Netflix</h3></div>
+        </a>
+
+        <!-- Canva Pro -->
+        <a class="card category-tile" href="canva.html">
+          <div class="media">
+            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+              <defs><linearGradient id="sub-b" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="var(--cat-b)"/><stop offset="1" stop-color="var(--cat-a)"/></linearGradient></defs>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="260" cy="540" r="220" fill="url(#sub-b)" opacity=".16"/>
+            </svg>
+            <span class="badge">Subcategory</span>
+          </div>
+          <div class="content"><h3>Canva Pro</h3></div>
+        </a>
+
+        <!-- Spotify -->
+        <a class="card category-tile" href="spotify.html">
+          <div class="media">
+            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+              <defs><linearGradient id="sub-c" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="var(--cat-a)"/><stop offset="1" stop-color="var(--cat-b)"/></linearGradient></defs>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="980" cy="140" r="200" fill="url(#sub-c)" opacity=".18"/>
+            </svg>
+            <span class="badge">Subcategory</span>
+          </div>
+          <div class="content"><h3>Spotify</h3></div>
+        </a>
+      </div>
     </div>
   </section>
 
   <footer class="site-footer" id="contact">
     <div class="container footer-grid">
       <div><h4>Allo Recharge</h4><p>Instant digital recharges, subscriptions, and growth services.</p></div>
-      <div><h4>Contact</h4><ul class="list-plain"><li><a target="_blank" href="https://wa.me/1234567890">WhatsApp</a></li><li><a href="mailto:support@allo.example">support@allo.example</a></li></ul></div>
+      <div><h4>Contact</h4><ul class="list-plain"><li><a target="_blank" href="https://wa.me/96171549671">WhatsApp: +961 71 549 671</a></li><li><a href="mailto:allorecharge@gmail.com">allorecharge@gmail.com</a></li></ul></div>
       <div><h4>Quick Links</h4><ul class="list-plain"><li><a href="/">Home</a></li><li><a href="#top">Top</a></li></ul></div>
     </div>
     <div class="copy">© 2025 Allo Recharge</div>
   </footer>
-
-  <script id="cat-data" type="application/json">
-  {
-    "slug": "subscriptions",
-    "title": "Subscriptions",
-    "subtitle": "Streaming & productivity plans.",
-    "products": [
-      {"title":"Item 1","badge":"Plan","url":"https://wa.me/1234567890?text=Subscriptions%20Item%201"},
-      {"title":"Item 2","badge":"Plan","url":"https://wa.me/1234567890?text=Subscriptions%20Item%202"},
-      {"title":"Item 3","badge":"Plan","url":"https://wa.me/1234567890?text=Subscriptions%20Item%203"}
-    ]
-  }
-  </script>
 </body>
 </html>
