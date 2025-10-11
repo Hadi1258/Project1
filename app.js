@@ -248,6 +248,7 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 /* ===== SERVICE WORKER (PWA) ===== */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(console.error);
+    const basePath = location.pathname.replace(/[^/]*$/, ''); // keeps trailing slash
+    navigator.serviceWorker.register(basePath + 'sw.js').catch(console.error);
   });
 }
