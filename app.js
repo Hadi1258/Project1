@@ -15,6 +15,8 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
     qsa('.branch', root).forEach(b=>{
       b.classList.remove('open');
       b.querySelector('.branch-toggle')?.setAttribute('aria-expanded','false');
+      const a = b.matches('.has-submenu') ? qs(':scope > a', b) : null;
+      if (a) a.setAttribute('aria-expanded','false');
     });
   }
 
@@ -40,11 +42,40 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
       const open = li.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(open));
       li.parentElement.querySelectorAll('.branch').forEach(sib=>{
-        if (sib !== li){ sib.classList.remove('open'); sib.querySelector('.branch-toggle')?.setAttribute('aria-expanded','false'); }
+        if (sib !== li){
+          sib.classList.remove('open');
+          sib.querySelector('.branch-toggle')?.setAttribute('aria-expanded','false');
+          const a = sib.matches('.has-submenu') ? qs(':scope > a', sib) : null;
+          if (a) a.setAttribute('aria-expanded','false');
+        }
       });
     });
   });
+
+  // anchor-based branch headers (tap to toggle; tap again to close)
+  qsa('.submenu .has-submenu > a').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      if (isDesktop()) return;
+      const li = link.parentElement;
+      const sub = qs(':scope > .subsubmenu', li);
+      if (!sub) return;
+      e.preventDefault();
+      const nowOpen = !li.classList.contains('open');
+      li.parentElement.querySelectorAll('.has-submenu').forEach(sib=>{
+        if (sib !== li){
+          sib.classList.remove('open');
+          const sb = qs(':scope > a', sib);
+          if (sb) sb.setAttribute('aria-expanded','false');
+          const bt = qs(':scope > .branch-toggle', sib);
+          if (bt) bt.setAttribute('aria-expanded','false');
+        }
+      });
+      li.classList.toggle('open', nowOpen);
+      link.setAttribute('aria-expanded', String(nowOpen));
+    });
+  });
 })();
+
 
 /* Predictive search (local) */
 (function predictiveSearch(){
