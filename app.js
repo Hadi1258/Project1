@@ -1,83 +1,119 @@
-// Mobile-only menu behavior; desktop uses hover via CSS.
+// Helpers
 const qs  = (s, r=document) => r.querySelector(s);
 const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
 const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 
-/* Categories dropdown + branch accordions */
+/* ===== MENU LOGIC (Mobile: tap to toggle, Desktop: hover via CSS) ===== */
 (function menus(){
   const toggleBtn = qs('.has-submenu .submenu-toggle');
   const root = toggleBtn?.closest('.has-submenu');
+  const submenu = root ? qs(':scope > .submenu', root) : null;
+
+  function closeAllBranches(scope){
+    qsa('.branch', scope).forEach(b=>{
+      b.classList.remove('open');
+      const t = qs(':scope > .branch-toggle', b);
+      t?.setAttribute('aria-expanded', 'false');
+    });
+  }
 
   function closeRoot(){
     if (!root) return;
     root.classList.remove('open');
     toggleBtn.setAttribute('aria-expanded','false');
-    qsa('.branch', root).forEach(b=>{
-      b.classList.remove('open');
-      b.querySelector('.branch-toggle')?.setAttribute('aria-expanded','false');
-      const a = b.matches('.has-submenu') ? qs(':scope > a', b) : null;
-      if (a) a.setAttribute('aria-expanded','false');
-    });
+    closeAllBranches(root);
   }
 
   if (toggleBtn && root){
+    // Toggle Categories on mobile
     toggleBtn.addEventListener('click', (e)=>{
       if (isDesktop()) return;
       e.preventDefault();
-      const open = root.classList.toggle('open');
+      const open = !root.classList.contains('open');
+      root.classList.toggle('open', open);
       toggleBtn.setAttribute('aria-expanded', String(open));
+      if (!open) closeAllBranches(root);
     });
+
+    // Outside click closes on mobile
     document.addEventListener('click', (e)=>{
       if (isDesktop()) return;
-      if (!root.contains(e.target)) closeRoot();
+      if (root.contains(e.target) || e.target === toggleBtn) return;
+      closeRoot();
     });
-    window.addEventListener('resize', ()=>{ if (isDesktop()) closeRoot(); }, {passive:true});
+
+    // Reset when switching to desktop
+    window.addEventListener('resize', ()=>{
+      if (isDesktop()){
+        toggleBtn.setAttribute('aria-expanded','false');
+        root.classList.remove('open');
+        closeAllBranches(root);
+      }
+    }, {passive:true});
   }
 
-  qsa('.branch .branch-toggle').forEach(btn=>{
+  // Branch accordions
+  qsa('.branch .branch-toggle', submenu || document).forEach(btn=>{
     btn.addEventListener('click', (e)=>{
-      if (isDesktop()) return;
-      e.preventDefault();
+      if (isDesktop()) return; // desktop navigates
       const li = btn.closest('.branch');
-      const open = li.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-      li.parentElement.querySelectorAll('.branch').forEach(sib=>{
-        if (sib !== li){
-          sib.classList.remove('open');
-          sib.querySelector('.branch-toggle')?.setAttribute('aria-expanded','false');
-          const a = sib.matches('.has-submenu') ? qs(':scope > a', sib) : null;
-          if (a) a.setAttribute('aria-expanded','false');
-        }
-      });
-    });
-  });
+      const isOpen = li.classList.contains('open');
+      const hasSub = qs(':scope > .subsubmenu', li);
 
-  // anchor-based branch headers (tap to toggle; tap again to close)
-  qsa('.submenu .has-submenu > a').forEach(link=>{
-    link.addEventListener('click', (e)=>{
-      if (isDesktop()) return;
-      const li = link.parentElement;
-      const sub = qs(':scope > .subsubmenu', li);
-      if (!sub) return;
-      e.preventDefault();
-      const nowOpen = !li.classList.contains('open');
-      li.parentElement.querySelectorAll('.has-submenu').forEach(sib=>{
-        if (sib !== li){
-          sib.classList.remove('open');
-          const sb = qs(':scope > a', sib);
-          if (sb) sb.setAttribute('aria-expanded','false');
-          const bt = qs(':scope > .branch-toggle', sib);
-          if (bt) bt.setAttribute('aria-expanded','false');
-        }
-      });
-      li.classList.toggle('open', nowOpen);
-      link.setAttribute('aria-expanded', String(nowOpen));
+      if (hasSub){
+        e.preventDefault();
+        // Close siblings
+        qsa(':scope > .branch', li.parentElement).forEach(sib=>{
+          if (sib !== li){
+            sib.classList.remove('open');
+            const t = qs(':scope > .branch-toggle', sib);
+            t?.setAttribute('aria-expanded', 'false');
+          }
+        });
+        // Toggle this one
+        li.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      }
     });
   });
 })();
 
+/* ===== COMPACT HEADER ON MOBILE SCROLL ===== */
+(function compactHeader(){
+  const header = qs('.site-header');
+  if (!header) return;
 
-/* Predictive search (local) */
+  let lastY = 0;
+  let ticking = false;
+  const THRESHOLD = 80; // px scrolled before compacting
+
+  function update(){
+    ticking = false;
+    if (isDesktop()){
+      header.classList.remove('compact');
+      return;
+    }
+    const y = window.scrollY || window.pageYOffset;
+    if (y > THRESHOLD){
+      header.classList.add('compact');   // hide brand & search, keep Home + Categories
+    } else {
+      header.classList.remove('compact');
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', ()=>{
+    if (!ticking){
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, {passive:true});
+
+  window.addEventListener('resize', update, {passive:true});
+  update(); // initial
+})();
+
+/* ===== PREDICTIVE SEARCH (local) ===== */
 (function predictiveSearch(){
   const input = qs('#site-search');
   const list  = qs('#search-suggestions');
@@ -98,7 +134,11 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
   document.querySelectorAll('.card.product .content h3').forEach(h=>{
     const card = h.closest('.card');
     const action = card?.querySelector('.actions a[href]');
-    index.push({title:h.textContent.trim(), url:action?.getAttribute('href')||'#', type:card?.classList.contains('service')?'Service':'Product'});
+    index.push({
+      title:h.textContent.trim(),
+      url:action?.getAttribute('href')||'#',
+      type:card?.classList.contains('service') ? 'Service' : 'Product'
+    });
   });
 
   const score = (it,q)=>{
@@ -108,7 +148,10 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
     sc += {Category:16,Product:12,Service:10}[it.type]||0; return sc;
   };
 
-  const highlight=(L,Q)=>{const i=L.toLowerCase().indexOf(Q.toLowerCase()); return i<0?escapeHTML(L):`${escapeHTML(L.slice(0,i))}<mark>${escapeHTML(L.slice(i,i+Q.length))}</mark>${escapeHTML(L.slice(i+Q.length))}`;};
+  const highlight=(L,Q)=>{
+    const i=L.toLowerCase().indexOf(Q.toLowerCase());
+    return i<0?escapeHTML(L):`${escapeHTML(L.slice(0,i))}<mark>${escapeHTML(L.slice(i,i+Q.length))}</mark>${escapeHTML(L.slice(i+Q.length))}`;
+  };
 
   let active=-1;
   const render=(items,q)=>{
@@ -118,29 +161,70 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
     cur.forEach((it,idx)=>{
       const li=document.createElement('li'); li.role='option'; li.id=`_sugg_${idx}`; li.dataset.url=it.url;
       li.innerHTML=`<span class="sugg-title">${highlight(it.title,q)}</span><span class="sugg-type">${it.type}</span>`;
-      li.addEventListener('mousedown',e=>{e.preventDefault(); if(it.url&&it.url!=='#') window.location.href=it.url;});
+      li.addEventListener('mousedown',e=>{
+        e.preventDefault();
+        if(it.url && it.url !== '#') window.location.href=it.url;
+      });
       list.appendChild(li);
     });
     list.hidden=false; input.setAttribute('aria-expanded','true'); active=-1;
   };
 
   const doSearch = debounce(()=>{
-    const q=input.value.trim(); if(!q){ list.hidden=true; input.setAttribute('aria-expanded','false'); return; }
+    const q=input.value.trim();
+    if(!q){ list.hidden=true; input.setAttribute('aria-expanded','false'); return; }
     const results=index.map(it=>({it,s:score(it,q)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>x.it);
     render(results,q);
   },110);
 
   input.addEventListener('input',doSearch);
-  form.addEventListener('submit',e=>{e.preventDefault(); const first=list.querySelector('li'); if(first) window.location.href=first.dataset.url;});
+
+  form.addEventListener('submit',e=>{
+    const first = list.querySelector('li');
+    if(first && !list.hidden){
+      e.preventDefault();
+      window.location.href = first.dataset.url;
+    }
+  });
+
   input.addEventListener('keydown',e=>{
     const items=[...list.querySelectorAll('li')];
     if(e.key==='ArrowDown'){e.preventDefault(); active=Math.min(active+1,items.length-1);}
     else if(e.key==='ArrowUp'){e.preventDefault(); active=Math.max(active-1,-1);}
-    else if(e.key==='Enter'){ if(!list.hidden && active>=0 && items[active]){ e.preventDefault(); window.location.href = items[active].dataset.url; } }
+    else if(e.key==='Enter'){
+      if(!list.hidden && active>=0 && items[active]){
+        e.preventDefault();
+        window.location.href = items[active].dataset.url;
+      }
+    }
     else if(e.key==='Escape'){ list.hidden=true; input.setAttribute('aria-expanded','false'); active=-1; }
     items.forEach((el,i)=>el.setAttribute('aria-selected', String(i===active)));
     if(active>=0 && items[active]) items[active].scrollIntoView({block:'nearest'});
   });
-  document.addEventListener('click',e=>{ if(!list.hidden && !form.contains(e.target)){ list.hidden=true; input.setAttribute('aria-expanded','false'); active=-1; }});
-  input.addEventListener('blur',()=> setTimeout(()=>{ list.hidden=true; input.setAttribute('aria-expanded','false'); active=-1; },120));
+
+  document.addEventListener('click',e=>{
+    if(!list.hidden && !form.contains(e.target)){
+      list.hidden=true; input.setAttribute('aria-expanded','false'); active=-1;
+    }
+  });
+
+  input.addEventListener('blur',()=> {
+    setTimeout(()=>{ list.hidden=true; input.setAttribute('aria-expanded','false'); active=-1; },120);
+  });
+})();
+
+/* ===== POLISH ===== */
+// Close Categories when navigating to an in-page anchor on mobile
+(function closeMenuOnAnchorNav(){
+  const anchors = qsa('a[href^="#"]');
+  const root = qs('.has-submenu');
+  const toggleBtn = qs('.submenu-toggle');
+  anchors.forEach(a=>{
+    a.addEventListener('click', ()=>{
+      if (!isDesktop() && root){
+        root.classList.remove('open');
+        toggleBtn?.setAttribute('aria-expanded','false');
+      }
+    });
+  });
 })();
