@@ -1,58 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Allo Recharge</title>
 
-  <!-- ===== SPEED / SEO / SOCIAL ===== -->
+  <!-- SEO / Social (keep or adjust URLs later) -->
   <meta name="description" content="Allo Recharge — instant mobile top-ups, subscriptions, game keys, and social growth services." />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff"   media="(prefers-color-scheme: light)">
-  <meta property="og:title" content="Allo Recharge" />
-  <meta property="og:description" content="Instant recharges, subscriptions, game keys, and social growth services." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://your-domain.tld/" />
-  <meta property="og:image" content="https://your-domain.tld/assets/og-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Allo Recharge" />
-  <meta name="twitter:description" content="Instant recharges, subscriptions, game keys, and social growth services." />
-  <meta name="twitter:image" content="https://your-domain.tld/assets/og-cover.jpg" />
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Allo Recharge",
-    "url":"https://your-domain.tld/",
-    "logo":"https://your-domain.tld/assets/logo-512.png",
-    "sameAs":["https://wa.me/96171549671","mailto:allorecharge@gmail.com"]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"Allo Recharge",
-    "url":"https://your-domain.tld/",
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"https://your-domain.tld/search?q={query}",
-      "query-input":"required name=query"
-    }
-  }
-  </script>
-
-  <!-- PWA / Icons -->
   <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="icon" sizes="32x32" href="assets/favicon-32.png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-
-  <!-- Optional: privacy-friendly analytics (uncomment and set your domain) -->
-  <!-- <script defer data-domain="your-domain.tld" src="https://plausible.io/js/script.js"></script> -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
@@ -67,8 +29,7 @@
         <span class="logo-text">ALLO <strong>RECHARGE</strong></span>
       </a>
 
-      <!-- Theme toggle (new) -->
-      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌓</button>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">🌓</button>
 
       <form class="search" role="search" aria-label="Site search" autocomplete="off">
         <label class="visually-hidden" for="site-search">Search</label>
@@ -91,6 +52,7 @@
       <nav id="site-nav" class="site-nav" aria-label="Primary">
         <ul class="menu" role="menubar">
           <li class="m-primary" role="none"><a role="menuitem" href="#top">Home</a></li>
+
           <li class="has-submenu m-primary" role="none">
             <button class="submenu-toggle" aria-expanded="false" aria-controls="menu-categories" type="button">Categories</button>
             <ul id="menu-categories" class="submenu" role="menu" aria-label="Categories">
@@ -105,7 +67,7 @@
                 <a class="branch-toggle" href="subscriptions.html" aria-expanded="false" role="menuitem">Subscriptions</a>
                 <ul class="subsubmenu" role="menu" aria-label="Subscriptions">
                   <li role="none"><a role="menuitem" href="netflix.html">Netflix</a></li>
-                  <li role="none"><a role="menuitem" href="canva.html">Canva Pro</a></li>
+                  <li role="none"><a role="menuitem" href="canva.html">Canva Pro</</a></li>
                   <li role="none"><a role="menuitem" href="spotify.html">Spotify</a></li>
                 </ul>
               </li>
@@ -117,7 +79,6 @@
                   <li role="none"><a role="menuitem" href="youtube.html">YouTube (Subs / Views)</a></li>
                 </ul>
               </li>
-
               <li role="none"><a role="menuitem" href="steam-keys.html">Steam Keys</a></li>
               <li role="none"><a role="menuitem" href="steam-games.html">Steam Games</a></li>
               <li role="none"><a role="menuitem" href="services.html">Services</a></li>
@@ -155,7 +116,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-tele" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="220" cy="130" r="240" fill="url(#g-tele)" opacity=".18"/>
               <circle cx="1020" cy="540" r="260" fill="url(#g-tele)" opacity=".14"/>
             </svg>
@@ -168,7 +129,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-sub" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="1000" cy="110" r="220" fill="url(#g-sub)" opacity=".18"/>
               <circle cx="200" cy="590" r="240" fill="url(#g-sub)" opacity=".14"/>
             </svg>
@@ -181,7 +142,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-soc" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="980" cy="560" r="250" fill="url(#g-soc)" opacity=".16"/>
               <circle cx="280" cy="120" r="200" fill="url(#g-soc)" opacity=".2"/>
             </svg>
@@ -194,7 +155,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-keys" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="260" cy="540" r="220" fill="url(#g-keys)" opacity=".16"/>
             </svg>
             <span class="badge">Category</span>
@@ -206,7 +167,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-games" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="980" cy="140" r="200" fill="url(#g-games)" opacity=".18"/>
             </svg>
             <span class="badge">Category</span>
@@ -218,7 +179,7 @@
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-serv" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/>
+              <rect width="1200" height="675" fill="currentColor" opacity=".04"/>
               <circle cx="220" cy="150" r="220" fill="url(#g-serv)" opacity=".16"/>
             </svg>
             <span class="badge">Category</span>
@@ -330,7 +291,6 @@
     <div class="copy">© 2025 Allo Recharge. All rights reserved.</div>
   </footer>
 
-  <!-- Floating WhatsApp CTA -->
   <a class="floating-cta" href="https://wa.me/96171549671" aria-label="Chat on WhatsApp">💬</a>
 </body>
 </html>
