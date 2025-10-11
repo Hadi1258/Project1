@@ -8,72 +8,98 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <div id="top"></div>
-  <header class="site-header">
+  <div id="top" aria-hidden="true"></div>
+
+  <header class="site-header" role="banner">
     <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Allo Recharge Home">
-        <span class="logo-mark">⚡</span>
+      <!-- Brand (hidden in compact mobile header) -->
+      <a class="brand" href="#top" aria-label="Allo Recharge Home">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
         <span class="logo-text">ALLO <strong>RECHARGE</strong></span>
       </a>
 
-      <form class="search" role="search" aria-label="Site search">
-        <input id="site-search" type="search" name="q" placeholder="Search recharges, subscriptions…" autocomplete="off" />
+      <!-- Search (hidden in compact mobile header) -->
+      <form class="search" role="search" aria-label="Site search" autocomplete="off">
+        <label class="visually-hidden" for="site-search">Search</label>
+        <input
+          id="site-search"
+          type="search"
+          name="q"
+          placeholder="Search recharges, subscriptions…"
+          inputmode="search"
+          autocomplete="off"
+          aria-autocomplete="list"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-controls="search-suggestions"
+        />
         <button type="submit" class="btn btn-ghost">Search</button>
         <ul id="search-suggestions" class="search-suggestions" role="listbox" hidden></ul>
       </form>
 
+      <!-- Primary Navigation -->
       <nav id="site-nav" class="site-nav" aria-label="Primary">
-        <ul class="menu">
-          <li class="m-primary"><a href="#top">Home</a></li>
-          <li class="has-submenu m-primary">
-            <button class="submenu-toggle" aria-expanded="false">Categories</button>
-            <ul class="submenu">
-              <!-- Telecom: full-row link -->
-              <li class="branch">
-                <a class="branch-toggle" href="telecom.html" aria-expanded="false">Telecom</a>
-                <ul class="subsubmenu">
-                  <li><a href="MTC.html">Touch (MTC)</a></li>
-                  <li><a href="ALFA.html">Alfa</a></li>
+        <ul class="menu" role="menubar">
+          <li class="m-primary" role="none"><a role="menuitem" href="#top">Home</a></li>
+
+          <!-- Categories (desktop: hover; mobile: tap toggle) -->
+          <li class="has-submenu m-primary" role="none">
+            <button
+              class="submenu-toggle"
+              aria-expanded="false"
+              aria-controls="menu-categories"
+              type="button"
+            >Categories</button>
+
+            <ul id="menu-categories" class="submenu" role="menu" aria-label="Categories">
+              <!-- Telecom -->
+              <li class="branch" role="none">
+                <a class="branch-toggle" href="telecom.html" aria-expanded="false" role="menuitem">Telecom</a>
+                <ul class="subsubmenu" role="menu" aria-label="Telecom">
+                  <li role="none"><a role="menuitem" href="MTC.html">Touch (MTC)</a></li>
+                  <li role="none"><a role="menuitem" href="ALFA.html">Alfa</a></li>
                 </ul>
               </li>
 
-              <!-- Subscriptions: full-row link -->
-              <li class="branch">
-                <a class="branch-toggle" href="subscriptions.html" aria-expanded="false">Subscriptions</a>
-                <ul class="subsubmenu">
-                  <li><a href="netflix.html">Netflix</a></li>
-                  <li><a href="canva.html">Canva Pro</a></li>
-                  <li><a href="spotify.html">Spotify</a></li>
+              <!-- Subscriptions -->
+              <li class="branch" role="none">
+                <a class="branch-toggle" href="subscriptions.html" aria-expanded="false" role="menuitem">Subscriptions</a>
+                <ul class="subsubmenu" role="menu" aria-label="Subscriptions">
+                  <li role="none"><a role="menuitem" href="netflix.html">Netflix</a></li>
+                  <li role="none"><a role="menuitem" href="canva.html">Canva Pro</a></li>
+                  <li role="none"><a role="menuitem" href="spotify.html">Spotify</a></li>
                 </ul>
               </li>
 
-              <!-- Social Media: full-row link -->
-              <li class="branch">
-                <a class="branch-toggle" href="social-media.html" aria-expanded="false">Social Media</a>
-                <ul class="subsubmenu">
-                  <li><a href="instagram.html">Instagram (Followers / Views)</a></li>
-                  <li><a href="tiktok.html">TikTok (Followers / Views)</a></li>
-                  <li><a href="youtube.html">YouTube (Subs / Views)</a></li>
+              <!-- Social -->
+              <li class="branch" role="none">
+                <a class="branch-toggle" href="social-media.html" aria-expanded="false" role="menuitem">Social Media</a>
+                <ul class="subsubmenu" role="menu" aria-label="Social Media">
+                  <li role="none"><a role="menuitem" href="instagram.html">Instagram (Followers / Views)</a></li>
+                  <li role="none"><a role="menuitem" href="tiktok.html">TikTok (Followers / Views)</a></li>
+                  <li role="none"><a role="menuitem" href="youtube.html">YouTube (Subs / Views)</a></li>
                 </ul>
               </li>
 
-              <li><a href="steam-keys.html">Steam Keys</a></li>
-              <li><a href="steam-games.html">Steam Games</a></li>
-              <li><a href="services.html">Services</a></li>
+              <li role="none"><a role="menuitem" href="steam-keys.html">Steam Keys</a></li>
+              <li role="none"><a role="menuitem" href="steam-games.html">Steam Games</a></li>
+              <li role="none"><a role="menuitem" href="services.html">Services</a></li>
             </ul>
           </li>
 
-          <li class="hide-mobile"><a href="#whats-new">What’s New</a></li>
-          <li class="hide-mobile"><a href="#featured">Featured</a></li>
-          <li class="hide-mobile"><a href="#contact">Contact</a></li>
+          <!-- Hidden on mobile; visible desktop -->
+          <li class="hide-mobile" role="none"><a role="menuitem" href="#whats-new">What’s New</a></li>
+          <li class="hide-mobile" role="none"><a role="menuitem" href="#featured">Featured</a></li>
+          <li class="hide-mobile" role="none"><a role="menuitem" href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
-      <h1>Top-Up. Subscriptions. Social Boost.</h1>
+      <h1 id="hero-title">Top-Up. Subscriptions. Social Boost.</h1>
       <p>Instant delivery for mobile recharges, game keys, streaming plans, and social growth packages.</p>
       <div class="hero-cta">
         <a class="btn" href="#featured">Shop Featured</a>
@@ -82,64 +108,72 @@
     </div>
   </section>
 
-  <!-- ===== Categories ===== -->
-  <section id="categories-grid" class="section">
+  <!-- Categories -->
+  <section id="categories-grid" class="section" aria-labelledby="cat-title">
     <div class="container">
       <div class="section-head">
-        <h2>Browse Categories</h2>
+        <h2 id="cat-title">Browse Categories</h2>
         <p class="section-sub">Tap a category to view all related products.</p>
       </div>
 
       <div class="card-grid">
         <a class="card category-tile" href="telecom.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-tele" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="220" cy="130" r="240" fill="url(#g-tele)" opacity=".18"/><circle cx="1020" cy="540" r="260" fill="url(#g-tele)" opacity=".14"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="220" cy="130" r="240" fill="url(#g-tele)" opacity=".18"/>
+              <circle cx="1020" cy="540" r="260" fill="url(#g-tele)" opacity=".14"/>
             </svg>
             <span class="badge">Category</span>
           </div>
-          <div class="content"><h3>Telecom</h3><p>Lebanon carriers, bundles & top-ups.</p></div>
+          <div class="content"><h3>Telecom</h3><p>Lebanon carriers, bundles &amp; top-ups.</p></div>
         </a>
 
         <a class="card category-tile" href="subscriptions.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-sub" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="1000" cy="110" r="220" fill="url(#g-sub)" opacity=".18"/><circle cx="200" cy="590" r="240" fill="url(#g-sub)" opacity=".14"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="1000" cy="110" r="220" fill="url(#g-sub)" opacity=".18"/>
+              <circle cx="200" cy="590" r="240" fill="url(#g-sub)" opacity=".14"/>
             </svg>
             <span class="badge">Category</span>
           </div>
-          <div class="content"><h3>Subscriptions</h3><p>Netflix, Canva Pro, Spotify & more.</p></div>
+          <div class="content"><h3>Subscriptions</h3><p>Netflix, Canva Pro, Spotify &amp; more.</p></div>
         </a>
 
         <a class="card category-tile" href="social-media.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-soc" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="980" cy="560" r="250" fill="url(#g-soc)" opacity=".16"/><circle cx="280" cy="120" r="200" fill="url(#g-soc)" opacity=".2"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="980" cy="560" r="250" fill="url(#g-soc)" opacity=".16"/>
+              <circle cx="280" cy="120" r="200" fill="url(#g-soc)" opacity=".2"/>
             </svg>
             <span class="badge">Category</span>
           </div>
-          <div class="content"><h3>Social Media</h3><p>Followers, views & growth packages.</p></div>
+          <div class="content"><h3>Social Media</h3><p>Followers, views &amp; growth packages.</p></div>
         </a>
 
         <a class="card category-tile" href="steam-keys.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-keys" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="260" cy="540" r="220" fill="url(#g-keys)" opacity=".16"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="260" cy="540" r="220" fill="url(#g-keys)" opacity=".16"/>
             </svg>
             <span class="badge">Category</span>
           </div>
-          <div class="content"><h3>Steam Keys</h3><p>PC game keys — global & region-free.</p></div>
+          <div class="content"><h3>Steam Keys</h3><p>PC game keys — global &amp; region-free.</p></div>
         </a>
 
         <a class="card category-tile" href="steam-games.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-games" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="980" cy="140" r="200" fill="url(#g-games)" opacity=".18"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="980" cy="140" r="200" fill="url(#g-games)" opacity=".18"/>
             </svg>
             <span class="badge">Category</span>
           </div>
@@ -147,24 +181,25 @@
         </a>
 
         <a class="card category-tile" href="services.html">
-          <div class="media">
-            <svg class="cover" viewBox="0 0 1200 675" aria-hidden="true">
+          <div class="media" aria-hidden="true">
+            <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-serv" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
-              <rect width="1200" height="675" fill="#0e121a"/><circle cx="220" cy="150" r="220" fill="url(#g-serv)" opacity=".16"/>
+              <rect width="1200" height="675" fill="#0e121a"/>
+              <circle cx="220" cy="150" r="220" fill="url(#g-serv)" opacity=".16"/>
             </svg>
             <span class="badge">Category</span>
           </div>
-          <div class="content"><h3>Services</h3><p>Web design, SMM, Carfax & more.</p></div>
+          <div class="content"><h3>Services</h3><p>Web design, SMM, Carfax &amp; more.</p></div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Featured ===== -->
-  <section id="featured" class="section">
+  <!-- Featured -->
+  <section id="featured" class="section" aria-labelledby="feat-title">
     <div class="container">
       <div class="section-head">
-        <h2>Featured Products</h2>
+        <h2 id="feat-title">Featured Products</h2>
         <p class="section-sub">Our most popular picks—ready in minutes.</p>
       </div>
 
@@ -199,11 +234,11 @@
     </div>
   </section>
 
-  <!-- ===== What’s New ===== -->
-  <section id="whats-new" class="section">
+  <!-- What’s New -->
+  <section id="whats-new" class="section" aria-labelledby="new-title">
     <div class="container">
       <div class="section-head">
-        <h2>What’s New</h2>
+        <h2 id="new-title">What’s New</h2>
         <p class="section-sub">Fresh services we just launched.</p>
       </div>
 
@@ -213,7 +248,7 @@
             <svg viewBox="0 0 24 24" class="icon"><path d="M3 5h18v14H3zM3 9h18M9 19v-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="badge">Service</span>
           </div>
-          <div class="content"><h3>Web Design Services</h3><p>Modern, responsive websites for brands & shops.</p></div>
+          <div class="content"><h3>Web Design Services</h3><p>Modern, responsive websites for brands &amp; shops.</p></div>
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99d%20like%20Web%20Design%20Services.">Get a Quote</a></div>
         </article>
 
@@ -222,7 +257,7 @@
             <svg viewBox="0 0 24 24" class="icon"><path d="M7 7h10v10H7zM3 12h4M17 12h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="badge">Service</span>
           </div>
-          <div class="content"><h3>Social Media Management</h3><p>Content, scheduling, growth & reporting.</p></div>
+          <div class="content"><h3>Social Media Management</h3><p>Content, scheduling, growth &amp; reporting.</p></div>
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99m%20interested%20in%20Social%20Media%20Management.">Let’s Talk</a></div>
         </article>
 
@@ -238,7 +273,7 @@
     </div>
   </section>
 
-  <footer class="site-footer" id="contact">
+  <footer class="site-footer" id="contact" role="contentinfo">
     <div class="container footer-grid">
       <div>
         <h4>Allo Recharge</h4>
@@ -247,8 +282,8 @@
       <div>
         <h4>Contact</h4>
         <ul class="list-plain">
-          <li><a target="_blank" href="https://wa.me/1234567890">WhatsApp: +961 71 549 671</a></li>
-          <li><a href="mailto:support@allo.example">allorecharge@gmail.com</a></li>
+          <li><a target="_blank" href="https://wa.me/96171549671">WhatsApp: +961 71 549 671</a></li>
+          <li><a href="mailto:allorecharge@gmail.com">allorecharge@gmail.com</a></li>
         </ul>
       </div>
       <div>
