@@ -1,17 +1,24 @@
-// Simple offline cache (stale-while-revalidate)
-const CACHE = "allo-v1";
-const ASSETS = [
-  "/", "/index.html",
-  "/style.css", "/app.js",
-  "/assets/logo-192.png", "/assets/logo-512.png"
-];
+// Simple offline cache (stale-while-revalidate) — GitHub Pages safe
+const VERSION = 'v1';
+const CACHE = `allo-${VERSION}`;
 
-self.addEventListener("install", (e) => {
+// Build a base URL so ASSETS work under /REPO/
+const BASE = self.registration.scope; // e.g., https://USERNAME.github.io/REPO/
+
+const ASSETS = [
+  'index.html',
+  'style.css',
+  'app.js',
+  'assets/logo-192.png',
+  'assets/logo-512.png'
+].map(path => new URL(path, BASE).toString());
+
+self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (e) => {
+self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
@@ -20,9 +27,10 @@ self.addEventListener("activate", (e) => {
   self.clients.claim();
 });
 
-self.addEventListener("fetch", (e) => {
+self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== "GET") return;
+  if (req.method !== 'GET') return;
+
   e.respondWith(
     caches.match(req).then(cached => {
       const fetchPromise = fetch(req).then(res => {
