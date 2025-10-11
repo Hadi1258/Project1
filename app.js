@@ -1,4 +1,4 @@
-// Helpers
+// Helpers (no :scope usage to maximize mobile compatibility)
 const qs  = (s, r=document) => r.querySelector(s);
 const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
 const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
@@ -6,14 +6,14 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 /* ===== MENU LOGIC (Mobile: tap to toggle, Desktop: hover via CSS) ===== */
 (function menus(){
   const toggleBtn = qs('.has-submenu .submenu-toggle');
-  const root = toggleBtn?.closest('.has-submenu');
-  const submenu = root ? qs(':scope > .submenu', root) : null;
+  const root = toggleBtn ? toggleBtn.closest('.has-submenu') : null;
+  const submenu = root ? root.querySelector('.submenu') : null;
 
   function closeAllBranches(scope){
     qsa('.branch', scope).forEach(b=>{
       b.classList.remove('open');
-      const t = qs(':scope > .branch-toggle', b);
-      t?.setAttribute('aria-expanded', 'false');
+      const t = b.querySelector('.branch-toggle');
+      if (t) t.setAttribute('aria-expanded', 'false');
     });
   }
 
@@ -52,22 +52,23 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
     }, {passive:true});
   }
 
-  // Branch accordions
+  // Branch accordions (Telecom / Subscriptions / Social Media ...)
   qsa('.branch .branch-toggle', submenu || document).forEach(btn=>{
     btn.addEventListener('click', (e)=>{
-      if (isDesktop()) return; // desktop navigates
+      if (isDesktop()) return; // desktop navigates normally
       const li = btn.closest('.branch');
+      if (!li) return;
       const isOpen = li.classList.contains('open');
-      const hasSub = qs(':scope > .subsubmenu', li);
+      const hasSub = li.querySelector('.subsubmenu');
 
       if (hasSub){
         e.preventDefault();
         // Close siblings
-        qsa(':scope > .branch', li.parentElement).forEach(sib=>{
-          if (sib !== li){
+        Array.from(li.parentElement.children).forEach(sib=>{
+          if (sib !== li && sib.classList.contains('branch')){
             sib.classList.remove('open');
-            const t = qs(':scope > .branch-toggle', sib);
-            t?.setAttribute('aria-expanded', 'false');
+            const t = sib.querySelector('.branch-toggle');
+            if (t) t.setAttribute('aria-expanded','false');
           }
         });
         // Toggle this one
@@ -83,61 +84,63 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
   const header = qs('.site-header');
   if (!header) return;
 
-  let lastY = 0;
-  let ticking = false;
   const THRESHOLD = 80; // px scrolled before compacting
+  let lastAppliedCompact = null;
 
-  function update(){
-    ticking = false;
-    if (isDesktop()){
-      header.classList.remove('compact');
-      return;
-    }
-    const y = window.scrollY || window.pageYOffset;
-    if (y > THRESHOLD){
+  function applyCompactState(shouldCompact){
+    if (lastAppliedCompact === shouldCompact) return;
+    lastAppliedCompact = shouldCompact;
+    if (shouldCompact){
       header.classList.add('compact');   // hide brand & search, keep Home + Categories
     } else {
       header.classList.remove('compact');
     }
-    lastY = y;
   }
 
-  window.addEventListener('scroll', ()=>{
-    if (!ticking){
-      window.requestAnimationFrame(update);
-      ticking = true;
+  function onScrollOrResize(){
+    if (isDesktop()){
+      applyCompactState(false);
+      return;
     }
-  }, {passive:true});
+    const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    applyCompactState(y > THRESHOLD);
+  }
 
-  window.addEventListener('resize', update, {passive:true});
-  update(); // initial
+  // Use both scroll and touchmove to be extra safe on mobile browsers
+  window.addEventListener('scroll', onScrollOrResize, {passive:true});
+  window.addEventListener('touchmove', onScrollOrResize, {passive:true});
+  window.addEventListener('resize', onScrollOrResize, {passive:true});
+  document.addEventListener('DOMContentLoaded', onScrollOrResize);
+  onScrollOrResize();
 })();
 
 /* ===== PREDICTIVE SEARCH (local) ===== */
 (function predictiveSearch(){
   const input = qs('#site-search');
   const list  = qs('#search-suggestions');
-  const form  = input?.closest('form');
+  const form  = input ? input.closest('form') : null;
   if (!input || !list || !form) return;
 
   const escapeHTML = (s) => s.replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[c]));
   const debounce = (fn, wait=140)=>{ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
 
+  // Build simple index from DOM
   const index = [];
-  document.querySelectorAll('.category-tile').forEach(a=>{
-    const title = a.querySelector('h3')?.textContent?.trim();
+  qsa('.category-tile').forEach(a=>{
+    const h3 = a.querySelector('h3');
+    const title = h3 ? h3.textContent.trim() : '';
     if (title) index.push({title, url:a.getAttribute('href')||'#', type:'Category'});
   });
-  document.querySelectorAll('.submenu a').forEach(a=>{
+  qsa('.submenu a').forEach(a=>{
     index.push({title:a.textContent.trim(), url:a.getAttribute('href')||'#', type:'Category'});
   });
-  document.querySelectorAll('.card.product .content h3').forEach(h=>{
+  qsa('.card.product .content h3').forEach(h=>{
     const card = h.closest('.card');
-    const action = card?.querySelector('.actions a[href]');
+    const action = card ? card.querySelector('.actions a[href]') : null;
     index.push({
       title:h.textContent.trim(),
-      url:action?.getAttribute('href')||'#',
-      type:card?.classList.contains('service') ? 'Service' : 'Product'
+      url:action ? action.getAttribute('href') : '#',
+      type:card && card.classList.contains('service') ? 'Service' : 'Product'
     });
   });
 
@@ -223,7 +226,7 @@ const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
     a.addEventListener('click', ()=>{
       if (!isDesktop() && root){
         root.classList.remove('open');
-        toggleBtn?.setAttribute('aria-expanded','false');
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded','false');
       }
     });
   });
