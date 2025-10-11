@@ -4,6 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Allo Recharge</title>
+
+  <!-- ===== SPEED / SEO / SOCIAL ===== -->
+  <meta name="description" content="Allo Recharge — instant mobile top-ups, subscriptions, game keys, and social growth services." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff"   media="(prefers-color-scheme: light)">
+  <meta property="og:title" content="Allo Recharge" />
+  <meta property="og:description" content="Instant recharges, subscriptions, game keys, and social growth services." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.tld/" />
+  <meta property="og:image" content="https://your-domain.tld/assets/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Allo Recharge" />
+  <meta name="twitter:description" content="Instant recharges, subscriptions, game keys, and social growth services." />
+  <meta name="twitter:image" content="https://your-domain.tld/assets/og-cover.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Allo Recharge",
+    "url":"https://your-domain.tld/",
+    "logo":"https://your-domain.tld/assets/logo-512.png",
+    "sameAs":["https://wa.me/96171549671","mailto:allorecharge@gmail.com"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Allo Recharge",
+    "url":"https://your-domain.tld/",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://your-domain.tld/search?q={query}",
+      "query-input":"required name=query"
+    }
+  }
+  </script>
+
+  <!-- PWA / Icons -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <!-- Optional: privacy-friendly analytics (uncomment and set your domain) -->
+  <!-- <script defer data-domain="your-domain.tld" src="https://plausible.io/js/script.js"></script> -->
+
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
@@ -12,13 +62,14 @@
 
   <header class="site-header" role="banner">
     <div class="container header-inner">
-      <!-- Brand (hidden in compact mobile header) -->
       <a class="brand" href="#top" aria-label="Allo Recharge Home">
         <span class="logo-mark" aria-hidden="true">⚡</span>
         <span class="logo-text">ALLO <strong>RECHARGE</strong></span>
       </a>
 
-      <!-- Search (hidden in compact mobile header) -->
+      <!-- Theme toggle (new) -->
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌓</button>
+
       <form class="search" role="search" aria-label="Site search" autocomplete="off">
         <label class="visually-hidden" for="site-search">Search</label>
         <input
@@ -37,22 +88,12 @@
         <ul id="search-suggestions" class="search-suggestions" role="listbox" hidden></ul>
       </form>
 
-      <!-- Primary Navigation -->
       <nav id="site-nav" class="site-nav" aria-label="Primary">
         <ul class="menu" role="menubar">
           <li class="m-primary" role="none"><a role="menuitem" href="#top">Home</a></li>
-
-          <!-- Categories (desktop: hover; mobile: tap toggle) -->
           <li class="has-submenu m-primary" role="none">
-            <button
-              class="submenu-toggle"
-              aria-expanded="false"
-              aria-controls="menu-categories"
-              type="button"
-            >Categories</button>
-
+            <button class="submenu-toggle" aria-expanded="false" aria-controls="menu-categories" type="button">Categories</button>
             <ul id="menu-categories" class="submenu" role="menu" aria-label="Categories">
-              <!-- Telecom -->
               <li class="branch" role="none">
                 <a class="branch-toggle" href="telecom.html" aria-expanded="false" role="menuitem">Telecom</a>
                 <ul class="subsubmenu" role="menu" aria-label="Telecom">
@@ -60,8 +101,6 @@
                   <li role="none"><a role="menuitem" href="ALFA.html">Alfa</a></li>
                 </ul>
               </li>
-
-              <!-- Subscriptions -->
               <li class="branch" role="none">
                 <a class="branch-toggle" href="subscriptions.html" aria-expanded="false" role="menuitem">Subscriptions</a>
                 <ul class="subsubmenu" role="menu" aria-label="Subscriptions">
@@ -70,8 +109,6 @@
                   <li role="none"><a role="menuitem" href="spotify.html">Spotify</a></li>
                 </ul>
               </li>
-
-              <!-- Social -->
               <li class="branch" role="none">
                 <a class="branch-toggle" href="social-media.html" aria-expanded="false" role="menuitem">Social Media</a>
                 <ul class="subsubmenu" role="menu" aria-label="Social Media">
@@ -87,7 +124,6 @@
             </ul>
           </li>
 
-          <!-- Hidden on mobile; visible desktop -->
           <li class="hide-mobile" role="none"><a role="menuitem" href="#whats-new">What’s New</a></li>
           <li class="hide-mobile" role="none"><a role="menuitem" href="#featured">Featured</a></li>
           <li class="hide-mobile" role="none"><a role="menuitem" href="#contact">Contact</a></li>
@@ -96,7 +132,6 @@
     </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <h1 id="hero-title">Top-Up. Subscriptions. Social Boost.</h1>
@@ -108,16 +143,15 @@
     </div>
   </section>
 
-  <!-- Categories -->
   <section id="categories-grid" class="section" aria-labelledby="cat-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 id="cat-title">Browse Categories</h2>
         <p class="section-sub">Tap a category to view all related products.</p>
       </div>
 
       <div class="card-grid">
-        <a class="card category-tile" href="telecom.html">
+        <a class="card category-tile reveal" href="telecom.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-tele" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
@@ -130,7 +164,7 @@
           <div class="content"><h3>Telecom</h3><p>Lebanon carriers, bundles &amp; top-ups.</p></div>
         </a>
 
-        <a class="card category-tile" href="subscriptions.html">
+        <a class="card category-tile reveal" href="subscriptions.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-sub" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
@@ -143,7 +177,7 @@
           <div class="content"><h3>Subscriptions</h3><p>Netflix, Canva Pro, Spotify &amp; more.</p></div>
         </a>
 
-        <a class="card category-tile" href="social-media.html">
+        <a class="card category-tile reveal" href="social-media.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-soc" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
@@ -156,7 +190,7 @@
           <div class="content"><h3>Social Media</h3><p>Followers, views &amp; growth packages.</p></div>
         </a>
 
-        <a class="card category-tile" href="steam-keys.html">
+        <a class="card category-tile reveal" href="steam-keys.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-keys" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
@@ -168,7 +202,7 @@
           <div class="content"><h3>Steam Keys</h3><p>PC game keys — global &amp; region-free.</p></div>
         </a>
 
-        <a class="card category-tile" href="steam-games.html">
+        <a class="card category-tile reveal" href="steam-games.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-games" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3ac0f0"/><stop offset="1" stop-color="#6ae38b"/></linearGradient></defs>
@@ -180,7 +214,7 @@
           <div class="content"><h3>Steam Games</h3><p>Curated titles at great prices.</p></div>
         </a>
 
-        <a class="card category-tile" href="services.html">
+        <a class="card category-tile reveal" href="services.html">
           <div class="media" aria-hidden="true">
             <svg class="cover" viewBox="0 0 1200 675">
               <defs><linearGradient id="g-serv" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#6ae38b"/><stop offset="1" stop-color="#3ac0f0"/></linearGradient></defs>
@@ -195,36 +229,35 @@
     </div>
   </section>
 
-  <!-- Featured -->
   <section id="featured" class="section" aria-labelledby="feat-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 id="feat-title">Featured Products</h2>
         <p class="section-sub">Our most popular picks—ready in minutes.</p>
       </div>
 
       <div class="card-grid">
-        <article class="card product">
+        <article class="card product reveal">
           <div class="media">
-            <img src="assets/mtc-7_58.jpg" alt="Touch (MTC) Magic 7.58$ recharge card" />
+            <img src="assets/mtc-7_58.jpg" alt="Touch (MTC) Magic 7.58$ recharge card" loading="lazy" decoding="async" />
             <span class="badge price">$7.58</span>
           </div>
           <div class="content"><h3>Touch Magic 7.58</h3><p>Lebanon MTC bundle—popular fast recharge.</p></div>
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99d%20like%20Touch%20(MTC)%207.58%20Magic%20recharge.">Order on WhatsApp</a></div>
         </article>
 
-        <article class="card product">
+        <article class="card product reveal">
           <div class="media">
-            <img src="assets/pubg-steam.jpg" alt="PUBG Steam game key" />
+            <img src="assets/pubg-steam.jpg" alt="PUBG Steam game key" loading="lazy" decoding="async" />
             <span class="badge">Game</span>
           </div>
           <div class="content"><h3>PUBG (Steam)</h3><p>Original Steam key—global version.</p></div>
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99m%20interested%20in%20PUBG%20Steam%20key.">Order on WhatsApp</a></div>
         </article>
 
-        <article class="card product">
+        <article class="card product reveal">
           <div class="media">
-            <img src="assets/placeholder-product.jpg" alt="Curated digital product" />
+            <img src="assets/placeholder-product.jpg" alt="Curated digital product" loading="lazy" decoding="async" />
             <span class="badge">Hot</span>
           </div>
           <div class="content"><h3>Curated Digital Deal</h3><p>Limited weekly offer—ask for the current pick!</p></div>
@@ -234,16 +267,15 @@
     </div>
   </section>
 
-  <!-- What’s New -->
   <section id="whats-new" class="section" aria-labelledby="new-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 id="new-title">What’s New</h2>
         <p class="section-sub">Fresh services we just launched.</p>
       </div>
 
       <div class="card-grid">
-        <article class="card product service">
+        <article class="card product service reveal">
           <div class="media icon-only" aria-hidden="true">
             <svg viewBox="0 0 24 24" class="icon"><path d="M3 5h18v14H3zM3 9h18M9 19v-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="badge">Service</span>
@@ -252,7 +284,7 @@
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99d%20like%20Web%20Design%20Services.">Get a Quote</a></div>
         </article>
 
-        <article class="card product service">
+        <article class="card product service reveal">
           <div class="media icon-only" aria-hidden="true">
             <svg viewBox="0 0 24 24" class="icon"><path d="M7 7h10v10H7zM3 12h4M17 12h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="badge">Service</span>
@@ -261,7 +293,7 @@
           <div class="actions"><a class="btn" target="_blank" href="https://wa.me/96171549671?text=Hi!%20I%E2%80%99m%20interested%20in%20Social%20Media%20Management.">Let’s Talk</a></div>
         </article>
 
-        <article class="card product service">
+        <article class="card product service reveal">
           <div class="media icon-only" aria-hidden="true">
             <svg viewBox="0 0 24 24" class="icon"><path d="M4 7h16v10H4zM4 7l4-4h8l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 11h10M7 14h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="badge">Report</span>
@@ -297,5 +329,8 @@
     </div>
     <div class="copy">© 2025 Allo Recharge. All rights reserved.</div>
   </footer>
+
+  <!-- Floating WhatsApp CTA -->
+  <a class="floating-cta" href="https://wa.me/96171549671" aria-label="Chat on WhatsApp">💬</a>
 </body>
 </html>
