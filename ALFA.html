@@ -34,24 +34,12 @@
   </section>
 
 <style>
-.category-grid {
+.category-grid card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
   gap: 1.5rem; /* spacing between cards */
   justify-items: center; /* center cards in each cell */
   align-items: stretch; /* make all cards equal height */
-}
-
-@media (max-width: 1024px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
-  }
-}
-
-@media (max-width: 640px) {
-  .category-grid {
-    grid-template-columns: 1fr; /* 1 per row on phones */
-  }
 }
 </style>
 
