@@ -223,7 +223,7 @@ section:target{scroll-margin-top:calc(var(--header-h) + 18px)}
 /* Grid */
 .card-grid{
   display:grid; gap:var(--gap);
-  grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+  grid-template-columns:repeat(3, minmax(240px,1fr));
   align-items:stretch;
 }
 
@@ -290,3 +290,4 @@ section:target{scroll-margin-top:calc(var(--header-h) + 18px)}
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.is-visible{transition:none; opacity:1; transform:none}
 }
+
